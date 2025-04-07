@@ -20,7 +20,7 @@ function Chatbox() {
     <div className={styles.container}>
       {/* Header area */}
       <div className={styles.header}>
-        <h2 className={styles.title}>MCP Sandbox - LLM Chat</h2>
+        <h2 className={styles.title}>MCP Scaffold - LLM Chat</h2>
       </div>
 
       {/* Loading state */}

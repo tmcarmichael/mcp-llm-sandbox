@@ -1,6 +1,6 @@
-# LLM-Frontend
+# llm-frontend-ui
 
-! WIP - Under Development
+**Under Development**
 
 ## Overview
 
