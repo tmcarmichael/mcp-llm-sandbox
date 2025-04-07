@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <defs>
+    <!-- Glow filter: animates the blur radius for a pulsing effect -->
+    <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="2" result="coloredBlur">
+        <animate attributeName="stdDeviation" values="2;6;2" dur="2s" repeatCount="indefinite" />
+      </feGaussianBlur>
+      <feMerge>
+        <feMergeNode in="coloredBlur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+
+  <!-- Apply the glow filter to the entire network group -->
+  <g filter="url(#glow)">
+    <!-- Outer boundary circle -->
+    <circle cx="32" cy="32" r="30" fill="none" stroke="#2563eb" stroke-width="4"/>
+
+    <!-- Network nodes -->
+    <circle cx="32" cy="16" r="4" fill="#2563eb"/>
+    <circle cx="16" cy="48" r="4" fill="#2563eb"/>
+    <circle cx="48" cy="48" r="4" fill="#2563eb"/>
+
+    <!-- Connecting lines -->
+    <line x1="32" y1="16" x2="16" y2="48" stroke="#2563eb" stroke-width="2"/>
+    <line x1="32" y1="16" x2="48" y2="48" stroke="#2563eb" stroke-width="2"/>
+    <line x1="16" y1="48" x2="48" y2="48" stroke="#2563eb" stroke-width="2"/>
+  </g>
+</svg>
