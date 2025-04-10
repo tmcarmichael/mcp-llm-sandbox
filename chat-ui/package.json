@@ -1,5 +1,5 @@
 {
-  "name": "llm-frontend-ui",
+  "name": "chat-ui",
   "private": true,
   "version": "0.0.0",
   "type": "module",

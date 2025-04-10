@@ -56,13 +56,13 @@
 }
 
 .userBubble {
-  background-color: #fda4af;
+  background-color: #eea1b7;
   margin-right: auto;
   text-align: left;
 }
 
 .assistantBubble {
-  background-color: #c4b5fd;
+  background-color: #b7aaece1;
   margin-left: auto;
   text-align: right;
 }
@@ -105,7 +105,7 @@
   padding: 0.5rem 1rem;
   font-size: 1.125rem;
   border-radius: 0.375rem;
-  background-color: #ec489acc;
+  background-color: #ec489aa8;
   color: #ffffff;
   cursor: pointer;
   transition: transform 0.1s, border-color 0.2s, background-color 0.2s;
@@ -113,8 +113,8 @@
 }
 
 .sendButton:hover {
-  background-color: #db2778d9;
-  border-color: #646cff;
+  background-color: #db2778b9;
+  border-color: #4b54ff;
 }
 
 .sendButton:active {

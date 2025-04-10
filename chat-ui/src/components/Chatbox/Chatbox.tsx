@@ -1,9 +1,9 @@
 import { KeyboardEvent, ChangeEvent } from "react";
-import { useLocalLLMChat } from "../../hooks/useLocalLLMChat";
+import { useInferenceServerChat } from "../../hooks/useInferenceServerChat";
 import styles from "./Chatbox.module.css";
 
 function Chatbox() {
-  const { messages, inputText, loading, setInputText, handleSend } = useLocalLLMChat();
+  const { messages, inputText, loading, setInputText, handleSend } = useInferenceServerChat();
 
   const handleKeyDown = (e: KeyboardEvent<HTMLTextAreaElement>) => {
     if (e.key === "Enter" && !e.shiftKey) {
@@ -18,17 +18,13 @@ function Chatbox() {
 
   return (
     <div className={styles.container}>
-      {/* Header area */}
       <div className={styles.header}>
-        <h2 className={styles.title}>MCP Scaffold - LLM Chat</h2>
+        <h2 className={styles.title}>Sandbox for MCP LLM Augmentation</h2>
       </div>
-
-      {/* Loading state */}
-      {loading && messages.length === 0 && <div className={styles.loading}>Loading model...</div>}
 
       {/* Chat area */}
       <div className={styles.chatArea}>
-        {messages.map((msg: any, idx: any) => {
+        {messages.map((msg, idx) => {
           const isUser = msg.role === "user";
           return (
             <div
@@ -43,7 +39,7 @@ function Chatbox() {
         })}
       </div>
 
-      {/* Text input */}
+      {/* Input area */}
       <div className={styles.inputArea}>
         <div className={styles.inputRow}>
           <textarea

@@ -1,11 +1,12 @@
-import { useState, useEffect, useRef } from "react";
-import { pipeline, Pipeline } from "@xenova/transformers";
+import { useState } from "react";
 
 export type MessageRole = "user" | "assistant";
+
 export interface Message {
   role: MessageRole;
   content: string;
 }
+
 export interface UseLocalLLMChat {
   messages: Message[];
   inputText: string;
@@ -14,50 +15,44 @@ export interface UseLocalLLMChat {
   handleSend: () => Promise<void>;
 }
 
-export function useLocalLLMChat(): UseLocalLLMChat {
+export function useInferenceServerChat(): UseLocalLLMChat {
   const [messages, setMessages] = useState<Message[]>([]);
   const [inputText, setInputText] = useState("");
   const [loading, setLoading] = useState(false);
-  const pipelineRef = useRef<Pipeline | null>(null);
-
-  useEffect(() => {
-    let isMounted = true;
-    setLoading(true);
-    (async () => {
-      try {
-        const pipe = (await pipeline("text-generation", "Xenova/gpt2")) as any;
-        if (isMounted) {
-          pipelineRef.current = pipe;
-        }
-      } catch (err) {
-        console.error("Error loading model:", err);
-      } finally {
-        if (isMounted) {
-          setLoading(false);
-        }
-      }
-    })();
-    return () => {
-      isMounted = false;
-    };
-  }, []);
 
   const handleSend = async () => {
+    if (loading) return;
     const text = inputText.trim();
     if (!text) return;
+
     const userMessage: Message = { role: "user", content: text };
     setMessages((prev) => [...prev, userMessage]);
     setInputText("");
-    const pipe = pipelineRef.current;
-    if (!pipe) return;
+
     try {
       setLoading(true);
-      const output = await pipe(text, {});
-      const assistantReply = output?.[0]?.generated_text || "[No response]";
+
+      const response = await fetch(`${import.meta.env.VITE_INFERENCE_URL}/generate`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          prompt: text,
+          max_new_tokens: 50,
+          temperature: 0.2,
+        }),
+      });
+
+      if (!response.ok) {
+        throw new Error(`Server error: ${response.status} ${response.statusText}`);
+      }
+
+      const data = await response.json();
+      const assistantReply = data.generated_text ?? "[No response]";
       const assistantMessage: Message = { role: "assistant", content: assistantReply };
+
       setMessages((prev) => [...prev, assistantMessage]);
-    } catch (err) {
-      console.error("Generation error:", err);
+    } catch (error) {
+      console.error("Error calling inference server:", error);
     } finally {
       setLoading(false);
     }
