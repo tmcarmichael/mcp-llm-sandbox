@@ -1,6 +1,8 @@
-# mcp-scaffold
+# MCP Client-Server Sandbox for LLM Augmentation
 
 [![Development Status](https://img.shields.io/badge/status-under_development-orange)](#)
+[![License](https://img.shields.io/github/license/tmcarmichael/mcp-scaffold)](https://github.com/tmcarmichael/mcp-scaffold/blob/main/LICENSE)
+![](https://img.shields.io/github/last-commit/tmcarmichael/mcp-scaffold)
 
 ## Overview
 
@@ -15,5 +17,5 @@ With chatbox UI, LLM inference options in place, MCP Client and a couple demo MC
 ## Architecture
 
 <div style="text-align: center;">
-  <img src="./chat-ui/public/mcp-sandbox-architecture.png" alt="MCP Architecture" />
+  <img src="./docs/mcp-sandbox-architecture.png" alt="MCP Architecture" />
 </div>
