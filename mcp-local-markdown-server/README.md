@@ -1,6 +1,6 @@
 # mcp-local-markdown-server
 
-**Under Development**
+⚠️ **Under Development**
 
 ## Overview
 
